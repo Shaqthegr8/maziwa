@@ -28,91 +28,87 @@ export default function Home() {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="h1">
-        There you go... a canvas for your next Valora project!
-      </div>
-      {address && (
-        <>
-          <div className="h2 text-center">
-            Your address: <span className="font-bold text-sm">{address}</span>
-          </div>
-          {tx && (
-            <p className="font-bold mt-4">
-              Tx Completed: {(tx.hash as string).substring(0, 6)}...
-              {(tx.hash as string).substring(
-                tx.hash.length - 6,
-                tx.hash.length
-              )}
-            </p>
-          )}
-          <div className="w-full px-3 mt-7">
-            <PrimaryButton
-              loading={signingLoading}
-              onClick={async () => {
-                setSigningLoading(true);
-                const tx = await sendCUSD(address, "0.1");
-                setTx(tx);
-                setSigningLoading(false);
-              }}
-              title="Send 0.1 cUSD to your own address"
-              widthFull
-            />
-          </div>
-
-          <div className="w-full px-3 mt-6">
-            <PrimaryButton
-              loading={cUSDLoading}
-              onClick={async () => {
-                setCUSDLoading(true);
-                await signTransaction();
-                setCUSDLoading(false);
-              }}
-              title="Sign a Transaction"
-              widthFull
-            />
-          </div>
-
-          {userOwnedNFTs.length > 0 ? (
-            <div className="flex flex-col items-center justify-center w-full mt-7">
-              <p className="font-bold">My NFTs</p>
-              <div className="w-full grid grid-cols-2 gap-3 mt-3 px-2">
-                {userOwnedNFTs.map((tokenURI, index) => (
-                  <div
-                    key={index}
-                    className="p-2 border-[3px] border-colors-secondary rounded-xl"
-                  >
-                    <Image
-                      alt="VALORA NFT"
-                      src={tokenURI}
-                      className="w-[160px] h-[200px] object-cover"
-                      width={160}
-                      height={200}
-                    />
-                  </div>
-                ))}
-              </div>
+      
+      {/* Hero Section */}
+      <section className="text-center py-16 bg-blue-50 w-full">
+        <h1 className="text-4xl font-bold text-gray-800">
+          Start Investing with Maziwa Today
+        </h1>
+        <p className="mt-4 text-lg text-gray-600">
+          Unlock financial inclusion with savings, microloans, P2P lending, and investment opportunities.
+        </p>
+        <div className="mt-8">
+          <PrimaryButton
+            onClick={() => window.location.href = '/savings'}
+            title="Start Saving Today"
+            widthFull={false}
+          />
+        </div>
+      </section>
+      
+      
+      {/* Features Section */}
+      <section className="py-16 bg-white w-full">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-semibold text-gray-800">What We Offer</h2>
+          <p className="mt-4 text-lg text-gray-600">
+            Discover our range of financial services designed to empower you.
+          </p>
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="p-6 bg-gray-50 rounded-lg shadow-md">
+              <h3 className="text-2xl font-bold text-gray-800">Savings</h3>
+              <p className="mt-4 text-gray-600">
+                Save securely with competitive interest rates.
+              </p>
+              <PrimaryButton
+                onClick={() => window.location.href = '/savings'}
+                title="Learn More"
+                widthFull={false}
+              />
             </div>
-          ) : (
-            <div className="mt-5">You do not have any NFTs yet</div>
-          )}
-
-          <div className="w-full px-3 mt-5">
-            <PrimaryButton
-              loading={nftLoading}
-              onClick={async () => {
-                setNFTLoading(true);
-                const tx = await mintValoraNFT();
-                const tokenURIs = await getNFTs();
-                setUserOwnedNFTs(tokenURIs);
-                setTx(tx);
-                setNFTLoading(false);
-              }}
-              title="Mint Valora NFT"
-              widthFull
-            />
+            <div className="p-6 bg-gray-50 rounded-lg shadow-md">
+              <h3 className="text-2xl font-bold text-gray-800">Microloans</h3>
+              <p className="mt-4 text-gray-600">
+                Access small loans with flexible repayment options.
+              </p>
+              <PrimaryButton
+                onClick={() => window.location.href = '/microloans'}
+                title="Learn More"
+                widthFull={false}
+              />
+            </div>
+            <div className="p-6 bg-gray-50 rounded-lg shadow-md">
+              <h3 className="text-2xl font-bold text-gray-800">P2P Lending</h3>
+              <p className="mt-4 text-gray-600">
+                Lend or borrow money directly from peers in your community.
+              </p>
+              <PrimaryButton
+                onClick={() => window.location.href = '/p2p-lending'}
+                title="Learn More"
+                widthFull={false}
+              />
+            </div>
           </div>
-        </>
-      )}
+        </div>
+      </section>
+
+      {/* Call-to-Action Section */}
+      <section className="py-16 bg-indigo-600 text-white text-center w-full">
+        <h2 className="text-3xl font-bold">
+          Ready to get started with Maziwa?
+        </h2>
+        <p className="mt-4 text-lg">
+          Join us today and take control of your financial future.
+        </p>
+        <div className="mt-8">
+          <PrimaryButton
+            onClick={() => window.location.href = '/signup'}
+            title="Sign Up Now"
+            widthFull={false}
+            additionalClasses="bg-white text-indigo-600"
+          />
+        </div>
+      </section>
     </div>
   );
 }
