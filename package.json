@@ -11,8 +11,8 @@
     "react-app:start": "yarn workspace @celo-composer-valora-template/react-app start",
     "react-app:lint": "yarn workspace @celo-composer-valora-template/react-app lint",
     "test": "npx hardhat test",
-  "compile": "npx hardhat compile",
-  "deploy": "hardhat run scripts/deploy.js"
+    "compile": "npx hardhat compile",
+    "deploy": "hardhat run scripts/deploy.js"
   },
   "repository": {
     "type": "git",
@@ -31,7 +31,9 @@
     "celo"
   ],
   "dependencies": {
-    "@celo/rainbowkit-celo": "^1.2.0"
+    "@celo/rainbowkit-celo": "^1.2.0",
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
   },
   "devDependencies": {
     "chai": "^5.1.1",
